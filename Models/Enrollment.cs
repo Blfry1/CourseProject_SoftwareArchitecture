@@ -7,10 +7,7 @@ using System.Threading.Tasks;
 namespace CourseProject_SoftwareArchitecture.Models
 {
   
-        public enum Progress
-        {
-            Satisfactory, UnSatisfactory, Incomplete
-        }
+
 
     public class Enrollment
     {
@@ -20,8 +17,7 @@ namespace CourseProject_SoftwareArchitecture.Models
         public int SessionId { get; set; }
         public Swimmer Swimmer { get; set; }
         public Lesson Lesson { get; set; }
-        [DisplayFormat(NullDisplayText = "No Progress to Report Yet.")]
-        public Progress? Progress { get; set; }
+       
     }
 
 

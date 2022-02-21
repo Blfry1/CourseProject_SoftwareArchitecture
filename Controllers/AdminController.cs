@@ -1,4 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CourseProject_SoftwareArchitecture.Models;
+using CourseProject_SoftwareArchitecture.ViewModels;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,17 +11,19 @@ using System.Threading.Tasks;
 
 namespace CourseProject_SoftwareArchitecture.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
-        static readonly List<string> adminHome = new List<string>
-
-        { "Show all roles", "Add a role", "Assign user to a role", "Show all lessons", "Add a lesson" };
+      
 
         public IActionResult Index()
         {
-            ViewData["Admin"] = adminHome;
 
             return View();
         }
+        
+       
     }
 }
+
+

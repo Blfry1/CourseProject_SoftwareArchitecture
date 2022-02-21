@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-/* THIS IS A GITHUB TEST*/
+/* GITHUB TEST 2/21 5:50PM */
 
 namespace CourseProject_SoftwareArchitecture.Controllers
 {
@@ -66,6 +66,16 @@ namespace CourseProject_SoftwareArchitecture.Controllers
                     (vm.Email, vm.Password, false, false);
                 if (result.Succeeded)
                 {
+                    var user = await userManager.FindByEmailAsync(vm.Email);
+                    var roles = await userManager.GetRolesAsync(user);
+                    if (roles.Contains("Admin"))
+                    {
+                        return RedirectToAction("Index", "Admin");
+                    }
+                    else if (roles.Contains("Swimmer"))
+                    {
+                        return RedirectToAction("Index", "Swimmer");
+                    }
                     return RedirectToAction("Index", "Home");
                 }
 
