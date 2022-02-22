@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CourseProject_SoftwareArchitecture.Controllers
+/*namespace CourseProject_SoftwareArchitecture.Controllers
 {
     [Authorize(Roles ="Admin")]
     public class RoleController : Controller
@@ -89,3 +89,4 @@ namespace CourseProject_SoftwareArchitecture.Controllers
         }
     }
 }
+*/
