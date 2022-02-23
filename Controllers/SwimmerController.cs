@@ -7,14 +7,13 @@ using System.Threading.Tasks;
 
 namespace CourseProject_SoftwareArchitecture.Controllers
 {
-    public class HomeController : Controller
+    [Authorize(Roles = "Swimmer")]
+
+    public class SwimmerController : Controller
     {
-        [Authorize]
         public IActionResult Index()
         {
             return View();
         }
     }
 }
-/*hello everyone*/
-/*completing task 2*/

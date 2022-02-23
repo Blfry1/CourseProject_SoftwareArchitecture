@@ -72,6 +72,10 @@ namespace CourseProject_SoftwareArchitecture.Controllers
                     {
                         return RedirectToAction("Index", "Admin");
                     }
+                    else if (roles.Contains("Coach"))
+                    {
+                        return RedirectToAction("Index", "Coach");
+                    }
                     else if (roles.Contains("Swimmer"))
                     {
                         return RedirectToAction("Index", "Swimmer");
