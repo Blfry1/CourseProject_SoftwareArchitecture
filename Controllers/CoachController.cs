@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace CourseProject_SoftwareArchitecture.Controllers
 {
+    /* GIT HUB 2/22 11:00PM*/
     [Authorize(Roles = "Coach")]
 
     public class CoachController : Controller
