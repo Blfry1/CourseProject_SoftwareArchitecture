@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CourseProject_SoftwareArchitecture.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220220174819_MP")]
-    partial class MP
+    [Migration("20220223041401_M1")]
+    partial class M1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -84,6 +84,131 @@ namespace CourseProject_SoftwareArchitecture.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("CourseProject_SoftwareArchitecture.Models.Coach", b =>
+                {
+                    b.Property<int>("CoachId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CoachName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PhoneNumber")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("CoachId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Coaches");
+                });
+
+            modelBuilder.Entity("CourseProject_SoftwareArchitecture.Models.Enrollment", b =>
+                {
+                    b.Property<int>("EnrollmentId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("LessionId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("LessonId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SessionId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SwimmerId")
+                        .HasColumnType("int");
+
+                    b.HasKey("EnrollmentId");
+
+                    b.HasIndex("LessonId");
+
+                    b.HasIndex("SessionId");
+
+                    b.HasIndex("SwimmerId");
+
+                    b.ToTable("Enrollments");
+                });
+
+            modelBuilder.Entity("CourseProject_SoftwareArchitecture.Models.Lesson", b =>
+                {
+                    b.Property<int>("LessonId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CoachId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SkillLevel")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Tuition")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("LessonId");
+
+                    b.HasIndex("CoachId");
+
+                    b.ToTable("Lessons");
+                });
+
+            modelBuilder.Entity("CourseProject_SoftwareArchitecture.Models.Session", b =>
+                {
+                    b.Property<int>("SessionId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("CoachId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("DailyStartTime")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EndDate")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SeatCapacity")
+                        .HasColumnType("int");
+
+                    b.Property<string>("StartDate")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("SessionId");
+
+                    b.HasIndex("CoachId");
+
+                    b.ToTable("Sessions");
+                });
+
+            modelBuilder.Entity("CourseProject_SoftwareArchitecture.Models.Swimmer", b =>
+                {
+                    b.Property<int>("SwimmerId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("SwimmerName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("SwimmerId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Swimmers");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -215,6 +340,55 @@ namespace CourseProject_SoftwareArchitecture.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("CourseProject_SoftwareArchitecture.Models.Coach", b =>
+                {
+                    b.HasOne("CourseProject_SoftwareArchitecture.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("CourseProject_SoftwareArchitecture.Models.Enrollment", b =>
+                {
+                    b.HasOne("CourseProject_SoftwareArchitecture.Models.Lesson", "Lesson")
+                        .WithMany("Enrollments")
+                        .HasForeignKey("LessonId");
+
+                    b.HasOne("CourseProject_SoftwareArchitecture.Models.Session", null)
+                        .WithMany("Enrollments")
+                        .HasForeignKey("SessionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CourseProject_SoftwareArchitecture.Models.Swimmer", "Swimmer")
+                        .WithMany("Enrollment")
+                        .HasForeignKey("SwimmerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("CourseProject_SoftwareArchitecture.Models.Lesson", b =>
+                {
+                    b.HasOne("CourseProject_SoftwareArchitecture.Models.Coach", "Coach")
+                        .WithMany()
+                        .HasForeignKey("CoachId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("CourseProject_SoftwareArchitecture.Models.Session", b =>
+                {
+                    b.HasOne("CourseProject_SoftwareArchitecture.Models.Coach", "Coach")
+                        .WithMany("Lessons")
+                        .HasForeignKey("CoachId");
+                });
+
+            modelBuilder.Entity("CourseProject_SoftwareArchitecture.Models.Swimmer", b =>
+                {
+                    b.HasOne("CourseProject_SoftwareArchitecture.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

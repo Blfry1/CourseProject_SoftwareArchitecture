@@ -10,5 +10,10 @@ namespace CourseProject_SoftwareArchitecture.Models
         public int LessonId { get; set; }
         public string SkillLevel { get; set; }
         public string Tuition { get; set; }
-    }
+        public int CoachId { get; set; }
+        public Coach Coach { get; set; }
+        public ICollection<Enrollment> Enrollments
+
+        { get; set; }
+    }    
 }
