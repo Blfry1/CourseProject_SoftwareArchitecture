@@ -12,6 +12,6 @@ namespace CourseProject_SoftwareArchitecture.Models
         public int PhoneNumber { get; set; }
         public string UserId { get; set; }
         public virtual ApplicationUser User { get; set; }
-        public ICollection<Session> Lessons { get; set; }
+        public ICollection<Session> Sessions {get; set; }
     }
 }

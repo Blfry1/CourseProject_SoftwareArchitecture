@@ -4,14 +4,16 @@ using CourseProject_SoftwareArchitecture.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CourseProject_SoftwareArchitecture.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220223225200_M2")]
+    partial class M2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -114,7 +116,7 @@ namespace CourseProject_SoftwareArchitecture.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("Grade")
+                    b.Property<int>("LessionId")
                         .HasColumnType("int");
 
                     b.Property<int?>("LessonId")
@@ -195,15 +197,6 @@ namespace CourseProject_SoftwareArchitecture.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("DateofBirth")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Gender")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Phone")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SwimmerName")
                         .HasColumnType("nvarchar(max)");
@@ -358,18 +351,18 @@ namespace CourseProject_SoftwareArchitecture.Migrations
 
             modelBuilder.Entity("CourseProject_SoftwareArchitecture.Models.Enrollment", b =>
                 {
-                    b.HasOne("CourseProject_SoftwareArchitecture.Models.Lesson", null)
+                    b.HasOne("CourseProject_SoftwareArchitecture.Models.Lesson", "Lesson")
                         .WithMany("Enrollments")
                         .HasForeignKey("LessonId");
 
-                    b.HasOne("CourseProject_SoftwareArchitecture.Models.Session", "Session")
+                    b.HasOne("CourseProject_SoftwareArchitecture.Models.Session", null)
                         .WithMany("Enrollments")
                         .HasForeignKey("SessionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("CourseProject_SoftwareArchitecture.Models.Swimmer", "Swimmer")
-                        .WithMany("Enrollments")
+                        .WithMany("Enrollment")
                         .HasForeignKey("SwimmerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -387,7 +380,7 @@ namespace CourseProject_SoftwareArchitecture.Migrations
             modelBuilder.Entity("CourseProject_SoftwareArchitecture.Models.Session", b =>
                 {
                     b.HasOne("CourseProject_SoftwareArchitecture.Models.Coach", "Coach")
-                        .WithMany("Sessions")
+                        .WithMany("Lessons")
                         .HasForeignKey("CoachId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

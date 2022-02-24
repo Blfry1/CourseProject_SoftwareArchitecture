@@ -1,5 +1,15 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model CourseProject_SoftwareArchitecture.Models.Session
+<form asp-controller="Coach" asp-action="AddSession"
+      method="post">
+    <label asp-for="StartDate"></label>
+    <input asp-for="StartDate" />
+    <br />
+    <label asp-for="EndDate"></label>
+    <input asp-for="EndDate" />
+    <br />
+    <label asp-for="SeatCapacity"></label>
+    <input asp-for="SeatCapacity" />
+    <input asp-for="CoachId" type="hidden" />
+    <br />
+    <button type="submit">Add Session </button>
+</form>

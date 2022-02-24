@@ -1,0 +1,19 @@
+﻿@model CourseProject_SoftwareArchitecture.Models.Swimmer
+<h2>Add Your Profile</h2>
+<form asp-action="AddProfile">
+    <input asp-for="@Model.UserId" type="hidden" />
+    <label asp-for="SwimmerName"></label>
+    <input asp-for="SwimmerName" />
+    <br />
+    <label asp-for="DateofBirth"></label>
+    <input asp-for="DateofBirth" />
+    <br />
+    <label asp-for="Gender"></label>
+    <input asp-for="Gender" />
+    <br />
+    <label asp-for="Phone"></label>
+    <input asp-for="Phone" />
+    <br />
+    <button type="submit">Add Profile</button>
+    </form>
+<p><a asp-action="Index">Back to Swimmer Home</a></p>

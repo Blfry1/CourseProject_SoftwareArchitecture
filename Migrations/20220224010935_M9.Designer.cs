@@ -4,14 +4,16 @@ using CourseProject_SoftwareArchitecture.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CourseProject_SoftwareArchitecture.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220224010935_M9")]
+    partial class M9
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -117,7 +119,7 @@ namespace CourseProject_SoftwareArchitecture.Migrations
                     b.Property<int?>("Grade")
                         .HasColumnType("int");
 
-                    b.Property<int?>("LessonId")
+                    b.Property<int>("LessonId")
                         .HasColumnType("int");
 
                     b.Property<int>("SessionId")
@@ -358,9 +360,11 @@ namespace CourseProject_SoftwareArchitecture.Migrations
 
             modelBuilder.Entity("CourseProject_SoftwareArchitecture.Models.Enrollment", b =>
                 {
-                    b.HasOne("CourseProject_SoftwareArchitecture.Models.Lesson", null)
+                    b.HasOne("CourseProject_SoftwareArchitecture.Models.Lesson", "lesson")
                         .WithMany("Enrollments")
-                        .HasForeignKey("LessonId");
+                        .HasForeignKey("LessonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("CourseProject_SoftwareArchitecture.Models.Session", "Session")
                         .WithMany("Enrollments")
