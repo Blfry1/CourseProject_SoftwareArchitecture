@@ -47,6 +47,20 @@ namespace CourseProject_SoftwareArchitecture.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Lessons",
+                columns: table => new
+                {
+                    LessonId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SkillLevel = table.Column<string>(nullable: true),
+                    Tuition = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Lessons", x => x.LessonId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -180,6 +194,9 @@ namespace CourseProject_SoftwareArchitecture.Migrations
                     SwimmerId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     SwimmerName = table.Column<string>(nullable: true),
+                    Phone = table.Column<string>(nullable: true),
+                    Gender = table.Column<string>(nullable: true),
+                    DateofBirth = table.Column<string>(nullable: true),
                     UserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -194,27 +211,6 @@ namespace CourseProject_SoftwareArchitecture.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Lessons",
-                columns: table => new
-                {
-                    LessonId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    SkillLevel = table.Column<string>(nullable: true),
-                    Tuition = table.Column<string>(nullable: true),
-                    CoachId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Lessons", x => x.LessonId);
-                    table.ForeignKey(
-                        name: "FK_Lessons_Coaches_CoachId",
-                        column: x => x.CoachId,
-                        principalTable: "Coaches",
-                        principalColumn: "CoachId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Sessions",
                 columns: table => new
                 {
@@ -224,7 +220,8 @@ namespace CourseProject_SoftwareArchitecture.Migrations
                     EndDate = table.Column<string>(nullable: true),
                     SeatCapacity = table.Column<int>(nullable: false),
                     DailyStartTime = table.Column<string>(nullable: true),
-                    CoachId = table.Column<int>(nullable: true)
+                    CoachId = table.Column<int>(nullable: false),
+                    LessionsLessonId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -234,6 +231,12 @@ namespace CourseProject_SoftwareArchitecture.Migrations
                         column: x => x.CoachId,
                         principalTable: "Coaches",
                         principalColumn: "CoachId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Sessions_Lessons_LessionsLessonId",
+                        column: x => x.LessionsLessonId,
+                        principalTable: "Lessons",
+                        principalColumn: "LessonId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -244,19 +247,12 @@ namespace CourseProject_SoftwareArchitecture.Migrations
                     EnrollmentId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     SwimmerId = table.Column<int>(nullable: false),
-                    LessionId = table.Column<int>(nullable: false),
                     SessionId = table.Column<int>(nullable: false),
-                    LessonId = table.Column<int>(nullable: true)
+                    Grade = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Enrollments", x => x.EnrollmentId);
-                    table.ForeignKey(
-                        name: "FK_Enrollments_Lessons_LessonId",
-                        column: x => x.LessonId,
-                        principalTable: "Lessons",
-                        principalColumn: "LessonId",
-                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Enrollments_Sessions_SessionId",
                         column: x => x.SessionId,
@@ -316,11 +312,6 @@ namespace CourseProject_SoftwareArchitecture.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Enrollments_LessonId",
-                table: "Enrollments",
-                column: "LessonId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Enrollments_SessionId",
                 table: "Enrollments",
                 column: "SessionId");
@@ -331,14 +322,14 @@ namespace CourseProject_SoftwareArchitecture.Migrations
                 column: "SwimmerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Lessons_CoachId",
-                table: "Lessons",
-                column: "CoachId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Sessions_CoachId",
                 table: "Sessions",
                 column: "CoachId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Sessions_LessionsLessonId",
+                table: "Sessions",
+                column: "LessionsLessonId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Swimmers_UserId",
@@ -370,9 +361,6 @@ namespace CourseProject_SoftwareArchitecture.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "Lessons");
-
-            migrationBuilder.DropTable(
                 name: "Sessions");
 
             migrationBuilder.DropTable(
@@ -380,6 +368,9 @@ namespace CourseProject_SoftwareArchitecture.Migrations
 
             migrationBuilder.DropTable(
                 name: "Coaches");
+
+            migrationBuilder.DropTable(
+                name: "Lessons");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

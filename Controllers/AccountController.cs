@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-/* GITHUB TEST 2/21 5:50PM */
 
 namespace CourseProject_SoftwareArchitecture.Controllers
 {

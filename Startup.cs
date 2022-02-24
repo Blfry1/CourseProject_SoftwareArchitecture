@@ -22,6 +22,7 @@ namespace CourseProject_SoftwareArchitecture
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
+            //services.AddDbContext<LessonDbContext>(options => options.UseSqlServer(connection)); //not sure if this is needed for LessonViewModel
             services.AddMvc();
         }
 

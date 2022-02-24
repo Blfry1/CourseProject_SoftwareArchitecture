@@ -14,7 +14,7 @@ namespace CourseProject_SoftwareArchitecture.Models
         public string DailyStartTime { get; set; }
         public int CoachId { get; set; }
         public Coach Coach { get; set; }
-        public ICollection<Enrollment> Enrollments { get; set; }
+        public Lesson Lessions { get; set; }
 
     }
 }
