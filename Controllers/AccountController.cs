@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+/*Logout working*/
 
 namespace CourseProject_SoftwareArchitecture.Controllers
 {
@@ -92,7 +93,7 @@ namespace CourseProject_SoftwareArchitecture.Controllers
             await signInManager.SignOutAsync();
             return RedirectToAction("Login");
         }
-        /* Logout working*/
+      
 
     }
 }
