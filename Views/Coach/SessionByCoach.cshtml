@@ -3,7 +3,7 @@
 @{ 
     if (Model.Count() < 1)
             {
-                <p>You don't have a course yet. <a asp-for="AddSession">
+                <p>You don't have a session yet. <a asp-for="AddSession">
                           Add a session</a></p>
             }
             else
@@ -27,7 +27,8 @@
                         <td>@session.SeatCapacity</td>
                         <td>@session.DailyStartTime</td>
                         <td>
-                            <a asp-controller="Coach" asp-action="PostGrade" asp-route-id="@session.SessionId">Post Grade</a>
+                            <a asp-controller="Coach" asp-action="PostGrade" 
+                               asp-route-id="@session.SessionId">Post Grade</a>
                         </td>
                     </tr>
                 }

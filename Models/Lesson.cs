@@ -11,5 +11,6 @@ namespace CourseProject_SoftwareArchitecture.Models
         public string SkillLevel { get; set; }
         public string Tuition { get; set; }
         public ICollection<Session> Sessions { get; set; }
+
     }    
 }

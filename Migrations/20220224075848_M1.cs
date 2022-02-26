@@ -240,7 +240,7 @@ namespace CourseProject_SoftwareArchitecture.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
-            migrationBuilder.CreateTable(
+            _ = migrationBuilder.CreateTable(
                 name: "Enrollments",
                 columns: table => new
                 {
@@ -253,7 +253,7 @@ namespace CourseProject_SoftwareArchitecture.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Enrollments", x => x.EnrollmentId);
-                    table.ForeignKey(
+                    _ = table.ForeignKey(
                         name: "FK_Enrollments_Sessions_SessionId",
                         column: x => x.SessionId,
                         principalTable: "Sessions",

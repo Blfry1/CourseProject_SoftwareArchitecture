@@ -1,0 +1,17 @@
+﻿@model IEnumerable<CourseProject_SoftwareArchitecture.Models.Enrollment>
+
+<h3>Swimmer Name: @ViewData["sname"]</h3>
+<table border ="1">
+    <tr>
+        <th>Session Id</th>
+        <th>Report</th>
+    </tr>
+    @foreach (var c in Model)
+            {
+                <tr>
+                    <td>@c.Session.SessionId</td>
+                    <td>@Html.DisplayFor(m => c.GetLetterGrade())</td>
+                </tr>
+            }
+</table>
+<p><a asp-action="Index"> Back to swimmer home</a></p>

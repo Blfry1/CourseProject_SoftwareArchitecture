@@ -8,6 +8,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
+
 namespace CourseProject_SoftwareArchitecture.Controllers
 {
     [Authorize(Roles = "Swimmer")]
@@ -15,9 +16,14 @@ namespace CourseProject_SoftwareArchitecture.Controllers
     public class SwimmerController : Controller
     {
         private readonly ApplicationDbContext db;
+
         public SwimmerController(ApplicationDbContext db)
         {
             this.db = db;
+        }
+        public IActionResult Index ()
+        {
+            return View();
         }
         public IActionResult AddProfile()
         {
@@ -46,10 +52,12 @@ namespace CourseProject_SoftwareArchitecture.Controllers
             {
                 var swimmerToUpdate = db.Swimmers.FirstOrDefault
                     (i => i.UserId == currentUserId);
+                swimmerToUpdate.SwimmerId = swimmer.SwimmerId;
                 swimmerToUpdate.SwimmerName = swimmer.SwimmerName;
                 swimmerToUpdate.Phone = swimmer.Phone;
                 swimmerToUpdate.Gender = swimmer.Gender;
                 swimmerToUpdate.DateofBirth = swimmer.DateofBirth;
+                db.Update(swimmerToUpdate);
             }
             else
             {
@@ -82,11 +90,30 @@ namespace CourseProject_SoftwareArchitecture.Controllers
             await db.SaveChangesAsync();
             return View("Index");
         }
-
-        
-        public IActionResult Index()
+       
+        public async Task<IActionResult> CheckReport()
         {
-            return View();
+            ClaimsPrincipal currentUser = this.User;
+            var currentUserId = currentUser.FindFirst
+                (ClaimTypes.NameIdentifier).Value;
+            if (currentUserId == null)
+            {
+                return NotFound();
+            }
+            var swimmer = await db.Swimmers
+                .SingleOrDefaultAsync
+                (s => s.UserId == currentUserId);
+            var swimmerId = swimmer.SwimmerId;
+            var allSessions = await db.Enrollments
+                .Include(e => e.Session).Where
+                (C => C.SwimmerId == swimmerId)
+                .ToListAsync();
+            if (allSessions == null)
+            {
+                return NotFound();
+            }
+            ViewData["sname"] = swimmer.SwimmerName;
+            return View(allSessions);
         }
     }
 }

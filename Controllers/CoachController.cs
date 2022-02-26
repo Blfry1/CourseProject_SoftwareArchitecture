@@ -31,7 +31,7 @@ namespace CourseProject_SoftwareArchitecture.Controllers
             var currentUserId = this.User.FindFirst
                 (ClaimTypes.NameIdentifier).Value;
             Coach coach = new Coach();
-            if (db.Coaches.Any(i =>i.UserId == currentUserId))
+            if (db.Coaches.Any(i => i.UserId == currentUserId))
             {
                 coach = db.Coaches.FirstOrDefault
                     (i => i.UserId == currentUserId);
@@ -48,8 +48,8 @@ namespace CourseProject_SoftwareArchitecture.Controllers
         {
             var currentUserId = this.User.FindFirst
                 (ClaimTypes.NameIdentifier).Value;
-            if(db.Coaches.Any
-                (i=> i.UserId == currentUserId))
+            if (db.Coaches.Any
+                (i => i.UserId == currentUserId))
             {
                 var coachToUpdate = db.Coaches.
                     FirstOrDefault
@@ -76,16 +76,16 @@ namespace CourseProject_SoftwareArchitecture.Controllers
                 SingleOrDefault(i => i.UserId ==
                 currentUserId).CoachId;
             return View(session);
-            
+
         }
         [HttpPost]
         public async Task<IActionResult> AddSession(Session session)
         {
             db.Add(session);
             await db.SaveChangesAsync();
-        return RedirectToAction("Index", "Coach");
+            return RedirectToAction("Index", "Coach");
         }
-        public async Task<IActionResult> CourseByCoach()
+        public async Task<IActionResult> SessionByCoach()
         {
             var currentUserId = this.User.FindFirst
                 (ClaimTypes.NameIdentifier).Value;
@@ -95,10 +95,22 @@ namespace CourseProject_SoftwareArchitecture.Controllers
             i.CoachId == CoachId).ToListAsync();
             return View(session);
         }
-       public IActionResult ProgressReport()
+
+        public async Task <IActionResult> ProgressReport(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return NotFound();
+            }
+            var allSwimmers = await db.Enrollments.Include
+                (c => c.Session).Where(c => c.SessionId == id)
+                .ToListAsync();
+            if (allSwimmers == null)
+            {
+                return NotFound();
+            }
+            return View(allSwimmers);
+        }
         }
     }
 
-}

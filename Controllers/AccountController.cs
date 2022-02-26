@@ -86,7 +86,13 @@ namespace CourseProject_SoftwareArchitecture.Controllers
             }
             return View(vm);
         }
-      
+        [HttpPost]
+        public async Task <IActionResult> Logout()
+        {
+            await signInManager.SignOutAsync();
+            return RedirectToAction("Login");
+        }
+        /* Logout working*/
 
-    }       
+    }
 }
