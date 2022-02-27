@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace CourseProject_SoftwareArchitecture.Controllers
 {
-    //[Authorize(Roles = "Admin")]
+   [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
 
@@ -118,6 +118,8 @@ namespace CourseProject_SoftwareArchitecture.Controllers
             await db.SaveChangesAsync();
             return RedirectToAction("AllLesson");
         }
+
+      
     }
 }
 

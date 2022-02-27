@@ -129,11 +129,7 @@ namespace CourseProject_SoftwareArchitecture.Controllers
             return View(lessons);
         }
 
-        public IActionResult AllSession() //This is for testing/viewing all sessions created. BFRY 
-        {
-            var sessions = db.Sessions.ToList();
-            return View(sessions);
-        }
+        
 
     }
 }
