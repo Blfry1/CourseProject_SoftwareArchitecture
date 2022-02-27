@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CourseProject_SoftwareArchitecture.Migrations
 {
-    public partial class M1 : Migration
+    public partial class BLF1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -221,7 +221,7 @@ namespace CourseProject_SoftwareArchitecture.Migrations
                     SeatCapacity = table.Column<int>(nullable: false),
                     DailyStartTime = table.Column<string>(nullable: true),
                     CoachId = table.Column<int>(nullable: false),
-                    LessionsLessonId = table.Column<int>(nullable: true)
+                    LessonsLessonId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -233,14 +233,14 @@ namespace CourseProject_SoftwareArchitecture.Migrations
                         principalColumn: "CoachId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Sessions_Lessons_LessionsLessonId",
-                        column: x => x.LessionsLessonId,
+                        name: "FK_Sessions_Lessons_LessonsLessonId",
+                        column: x => x.LessonsLessonId,
                         principalTable: "Lessons",
                         principalColumn: "LessonId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
-            _ = migrationBuilder.CreateTable(
+            migrationBuilder.CreateTable(
                 name: "Enrollments",
                 columns: table => new
                 {
@@ -248,12 +248,12 @@ namespace CourseProject_SoftwareArchitecture.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     SwimmerId = table.Column<int>(nullable: false),
                     SessionId = table.Column<int>(nullable: false),
-                    Grade = table.Column<int>(nullable: true)
+                    ProgressReport = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Enrollments", x => x.EnrollmentId);
-                    _ = table.ForeignKey(
+                    table.ForeignKey(
                         name: "FK_Enrollments_Sessions_SessionId",
                         column: x => x.SessionId,
                         principalTable: "Sessions",
@@ -327,9 +327,9 @@ namespace CourseProject_SoftwareArchitecture.Migrations
                 column: "CoachId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Sessions_LessionsLessonId",
+                name: "IX_Sessions_LessonsLessonId",
                 table: "Sessions",
-                column: "LessionsLessonId");
+                column: "LessonsLessonId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Swimmers_UserId",

@@ -114,8 +114,8 @@ namespace CourseProject_SoftwareArchitecture.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("Grade")
-                        .HasColumnType("int");
+                    b.Property<string>("ProgressReport")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("SessionId")
                         .HasColumnType("int");
@@ -166,7 +166,7 @@ namespace CourseProject_SoftwareArchitecture.Migrations
                     b.Property<string>("EndDate")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("LessionsLessonId")
+                    b.Property<int?>("LessonsLessonId")
                         .HasColumnType("int");
 
                     b.Property<int>("SeatCapacity")
@@ -179,7 +179,7 @@ namespace CourseProject_SoftwareArchitecture.Migrations
 
                     b.HasIndex("CoachId");
 
-                    b.HasIndex("LessionsLessonId");
+                    b.HasIndex("LessonsLessonId");
 
                     b.ToTable("Sessions");
                 });
@@ -374,9 +374,9 @@ namespace CourseProject_SoftwareArchitecture.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("CourseProject_SoftwareArchitecture.Models.Lesson", "Lessions")
+                    b.HasOne("CourseProject_SoftwareArchitecture.Models.Lesson", "Lessons")
                         .WithMany("Sessions")
-                        .HasForeignKey("LessionsLessonId");
+                        .HasForeignKey("LessonsLessonId");
                 });
 
             modelBuilder.Entity("CourseProject_SoftwareArchitecture.Models.Swimmer", b =>

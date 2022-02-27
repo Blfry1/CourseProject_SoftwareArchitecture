@@ -67,16 +67,13 @@ namespace CourseProject_SoftwareArchitecture.Controllers
             await db.SaveChangesAsync();
             return View("Index");
         }
-        public IActionResult AddSession()
+        public IActionResult AddSession()   
         {
             Session session = new Session();
             var currentUserId = this.User.FindFirst
                 (ClaimTypes.NameIdentifier).Value;
-            session.CoachId = db.Coaches.
-                SingleOrDefault(i => i.UserId ==
-                currentUserId).CoachId;
+            session.CoachId = db.Coaches.SingleOrDefault(i => i.UserId == currentUserId).CoachId;  //If you get an error, Coach needs to add a profile first
             return View(session);
-
         }
         [HttpPost]
         public async Task<IActionResult> AddSession(Session session)
@@ -96,7 +93,7 @@ namespace CourseProject_SoftwareArchitecture.Controllers
             return View(session);
         }
 
-        public async Task <IActionResult> ProgressReport(int? id)
+        public async Task <IActionResult> AddProgressReport(int? id)
         {
             if (id == null)
             {
@@ -111,6 +108,33 @@ namespace CourseProject_SoftwareArchitecture.Controllers
             }
             return View(allSwimmers);
         }
+
+        [HttpPost]
+        public IActionResult AddProgressReport(List<Enrollment> enrollments)
+        {
+            foreach (var enrollement in enrollments)
+            {
+                var er = db.Enrollments.Find(enrollement.EnrollmentId);
+                er.ProgressReport = enrollement.ProgressReport;
+            }
+
+            db.SaveChanges();
+            return RedirectToAction("SessionByCoach");
         }
+
+
+        public IActionResult AllLesson()
+        {
+            var lessons = db.Lessons.ToList();
+            return View(lessons);
+        }
+
+        public IActionResult AllSession() //This is for testing/viewing all sessions created. BFRY 
+        {
+            var sessions = db.Sessions.ToList();
+            return View(sessions);
+        }
+
     }
+}
 

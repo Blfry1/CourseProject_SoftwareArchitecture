@@ -1,0 +1,35 @@
+﻿@model IEnumerable<CourseProject_SoftwareArchitecture.Models.Session>
+@{
+    if (Model.Count() < 1)
+    {
+        <p>No sessions in database yet.</p>
+    }
+    else
+    {
+        <h3>All Sessions</h3>
+        <table border="1">
+            <tr>
+                <th>Session ID</th>
+                <th>Coach ID</th>
+                <th>Coach</th>  <!--Change to ViewModel to capture Coach-->
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Daily Start Time</th>
+                <th>Seat Capacity</th>
+            </tr>
+            @foreach (var sessions in Model)
+            {
+        <tr>
+            <td>@sessions.SessionId</td>
+            <td>@sessions.CoachId</td>
+            <td>@sessions.Coach</td>
+            <td>@sessions.StartDate</td>
+            <td>@sessions.EndDate</td>
+            <td>@sessions.DailyStartTime</td>
+            <td>@sessions.SeatCapacity</td>
+
+        </tr>
+            }
+        </table>
+    }
+}

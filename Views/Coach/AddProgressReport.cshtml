@@ -1,7 +1,7 @@
 ﻿@model List<CourseProject_SoftwareArchitecture.Models.Enrollment>
 <h2>Enter Progress Report </h2>
-<h3>Course: @Model [0].Session.SessionId</h3>
-<form asp-controller="Coach" asp-action="ProgressReport" method="post">
+<h3>Course: @Model[0].Session.SessionId</h3>
+<form asp-controller="Coach" asp-action="AddProgressReport" method="post">
     <table border="1">
         <tr>
             <th></th>
@@ -16,7 +16,7 @@
                                value="@Model[i].EnrollmentId" />
                                </td>
                     <td>@Model[i].SwimmerId</td>
-                    <td><input asp-for="@Model[i].GetLetterGrade()" />
+                    <td><input asp-for="@Model[i].ProgressReport" />
                     </td>
                 </tr>
             }

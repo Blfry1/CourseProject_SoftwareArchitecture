@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 
 namespace CourseProject_SoftwareArchitecture.Models
 {
+ /*   
     public enum Grade
     {
         A, B, C, D, F, I, W, P
     }
-
+ */
 
     public class Enrollment
     {
@@ -21,6 +22,10 @@ namespace CourseProject_SoftwareArchitecture.Models
         public Swimmer Swimmer { get; set; }
         public Session Session { get; set; }
 
+
+       [DisplayFormat(NullDisplayText = "No Progress Report")]
+       public string ProgressReport { get; set; }
+/*
         private LetterGrade letterGrade;
 
         public LetterGrade GetLetterGrade()
@@ -32,6 +37,7 @@ namespace CourseProject_SoftwareArchitecture.Models
         {
             letterGrade = value;
         }
+*/
     }
 }
 
