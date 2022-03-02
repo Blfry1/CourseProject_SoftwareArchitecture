@@ -11,12 +11,17 @@
 
     @if (this.User.Identity.IsAuthenticated)
     {
-           <div>Hello, @this.User.Identity.Name</div>
-    <form method="post" asp-controller="Account" asp-action="Logout">
-        <input type="submit" value="Logout" />
-    </form>
+        <div>Hello, @this.User.Identity.Name</div>
+        <form method="post" asp-controller="Account" asp-action="Logout">
+            <input type="submit" value="Logout" />
+        </form>
     }
+
     @RenderBody()
+
+
+<img src="~/Image/3S_image.png" alt="Logo" height="300" width="920" data-atf="1" data-frt="0">
+
 </body>
 </html>
 

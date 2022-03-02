@@ -1,4 +1,5 @@
 using CourseProject_SoftwareArchitecture.Models;
+using FluentAssertions.Common;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -17,14 +18,17 @@ namespace CourseProject_SoftwareArchitecture
             var connection =
                 @"Server=(localdb)\mssqllocaldb;Database=IdentityDb;
                     Trusted_Connection=True;";
-                services.AddDbContext<ApplicationDbContext>
-                (options => options.UseSqlServer(connection));
+            services.AddDbContext<ApplicationDbContext>
+            (options => options.UseSqlServer(connection));
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
             //services.AddDbContext<LessonDbContext>(options => options.UseSqlServer(connection)); //not sure if this is needed for LessonViewModel
             services.AddMvc();
+
         }
+
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -35,6 +39,7 @@ namespace CourseProject_SoftwareArchitecture
             }
 
             app.UseRouting();
+            app.UseStaticFiles();
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>

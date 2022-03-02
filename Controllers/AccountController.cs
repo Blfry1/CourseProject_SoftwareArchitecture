@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-/*Logout working*/
+
 
 namespace CourseProject_SoftwareArchitecture.Controllers
 {
