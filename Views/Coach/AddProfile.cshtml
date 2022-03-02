@@ -1,13 +1,23 @@
 ﻿@model CourseProject_SoftwareArchitecture.Models.Coach
+    <p class="text-info lead">Fill out all fields</p>
 <h2> Add your Profile</h2>
-<form asp-action="AddProfile">
-    <input asp-for="@Model.UserId" type="hidden" />
-    <label asp-for="CoachName"></label>
-    <input asp-for="CoachName" />
-    <br />
-    <label asp-for="PhoneNumber"></label>
-    <input asp-for="PhoneNumber" />
-    <br />
-    <button type="submit">Add Profile</button>
-    </form>
-<p><a asp-action="Index">Back to coach home</a></p>
+<form asp-action="AddProfile" class="form-horizontal">
+    <fieldset class="form-group">
+        <input asp-for="@Model.UserId" type="hidden" />
+        <label asp-for="CoachName" class="control-label col-xs-2"></label>
+        <div class="col-xs-10">
+            <input asp-for="CoachName" class="form-control" />
+        </div>
+        <br />
+    </fieldset>
+    <fieldset class="form-group">
+        <label asp-for="PhoneNumber" class="control-label col-xs-2"></label>
+        <div class="col-xs-10">
+            <input asp-for="PhoneNumber" class="form-control" />
+        </div>
+        <br />
+        <button class="btn btn-primary" type="submit">Add Profile </button>
+    </fieldset>
+
+    <p><a asp-action="Index">Back to coach home</a></p>
+</form>

@@ -1,18 +1,36 @@
 ﻿@model CourseProject_SoftwareArchitecture.Models.Session
-<form asp-controller="Coach" asp-action="AddSession"
-      method="post">
-    <label asp-for="StartDate"></label>
-    <input asp-for="StartDate" />
-    <br />
-    <label asp-for="EndDate"></label>
-    <input asp-for="EndDate" />
-    <br />
-    <label asp-for="SeatCapacity"></label>
-    <input asp-for="SeatCapacity" />
-    <br />
-    <label asp-for="DailyStartTime"></label>
-    <input asp-for="DailyStartTime" />
-    <input asp-for="CoachId" type="hidden" />
-    <br />
-    <button type="submit">Add Session </button>
+    <p class="text-info lead">Fill out all fields</p>
+    <form asp-controller="Coach" asp-action="AddSession" method="post" class="form-horizontal">
+        <fieldset class="form-group">
+            <label asp-for="StartDate" class="control-label col-xs-2"></label>
+            <div class="col-xs-10">
+                <input asp-for="StartDate" class="form-control" />
+            </div>
+        </fieldset>
+        <br />
+        <fieldset class="form-group">
+            <label asp-for="EndDate" class="control-label col-xs-2">   </label>
+            <div class="col-xs-10">
+                <input asp-for="EndDate" class="form-control" />
+            </div>
+        </fieldset>
+        <br />
+
+
+        <fieldset class="form-group">
+            <label asp-for="SeatCapacity" class="control-label col-xs-2"></label>
+            <div class="col-xs-10">
+                <input asp-for="SeatCapacity" class="form-control" />
+            </div>
+        </fieldset>
+        <br />
+        <fieldset class="form-group">
+            <label asp-for="DailyStartTime" class="control-label col-xs-2">  </label>
+            <div class="col-xs-10">
+                <input asp-for="DailyStartTime" class="form-control"  />
+                <input asp-for="CoachId" type="hidden" class="form-control" />
+                </div>
+            </fieldset>
+                <br />
+                <button class="btn btn-primary" type="submit">Add Session</button> 
 </form>

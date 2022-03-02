@@ -1,11 +1,20 @@
 ﻿@model CourseProject_SoftwareArchitecture.Models.Lesson
+    <p class="text-info lead">Fill out all fields</p>
 <h2>Add a Lesson</h2>
-<form asp-controller="Admin" asp-action="AddLesson" method="post">
-    <label asp-for="SkillLevel"></label>
-    <input asp-for="SkillLevel" />
+<form asp-controller="Admin" asp-action="AddLesson" method="post" class="form-horizontal">
+    <fieldset class="form-group">
+        <label asp-for="SkillLevel" class="control-label col-xs-2"> </label>
+        <div class="col-xs-10">
+            <input asp-for="SkillLevel" class="form-control" />
+        </div>
+    </fieldset>
     <br />
-    <label asp-for="Tuition"></label>
-    <input asp-for="Tuition" />
+    <fieldset class="form-group">
+        <label asp-for="Tuition" class="control-label col-xs-2"></label>
+        <div class="col-xs-10">
+            <input asp-for="Tuition" class="form-control" />
+        </div>
+    </fieldset>
     <br />
-    <button type="submit">Add Lesson</button>
+    <button class="btn btn-primary" type="submit">Add Lesson</button>
 </form>

@@ -1,7 +1,16 @@
 ﻿@model Microsoft.AspNetCore.Identity.IdentityRole
-<form asp-controller="Admin" asp-action="AddRole" method="post">
-    <label asp-for="Name"></label>
-    <input asp-for="Name" />
+<p class="text-info lead">Fill out all fields</p>
+<form asp-controller="Admin" asp-action="AddRole" method="post" class="form-horizontal">
+  <fieldset class="form-group">
+    <label asp-for="Name" class="control-label col-xs-2"></label>
+      <div class="col-xs-10">
+    <input asp-for="Name"class="form-control" />
+          </div>
+      </fieldset>
     <br />
-    <button type="submit">Add Role </button>
+    <div class="form-group">
+        <div class="col-xs-offset-2 col-xs-10">
+    <button class="btn btn-primary" type="submit">Add Role </button>
+            </div>
+        </div>
 </form>

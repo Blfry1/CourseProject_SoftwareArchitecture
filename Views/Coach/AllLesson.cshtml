@@ -9,26 +9,28 @@
     else
     {
         <h3>All Lessons</h3>
-        <table border="1">
-            <tr>
-                <th>Lesson ID</th>
-                <th>Skill Level</th>
-                <th>Add Session</th>
-            </tr>
-            @foreach (var lessons in Model)
-            {
+        <div class="table-responsive">
+            <table class="table table-striped table-hover">
                 <tr>
-                    <td>@lessons.LessonId</td>
-                    <td>@lessons.SkillLevel</td>
-                    <td>
-                        <a asp-controller="Coach"
-                           asp-action="AddSession"
-                           asp-route-id="@lessons.LessonId">
-                            Add a Session
-                        </a>
-                    </td>
+                    <th>Lesson ID</th>
+                    <th>Skill Level</th>
+                    <th>Add Session</th>
                 </tr>
+                @foreach (var lessons in Model)
+                {
+                    <tr>
+                        <td>@lessons.LessonId</td>
+                        <td>@lessons.SkillLevel</td>
+                        <td>
+                            <a asp-controller="Coach"
+                               asp-action="AddSession"
+                               asp-route-id="@lessons.LessonId">
+                                Add a Session
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </table>
+            </div>
             }
-        </table>
-    }
-}
+            }

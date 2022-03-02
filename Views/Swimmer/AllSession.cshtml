@@ -7,38 +7,41 @@
             else
             {
                 <h3>All Sessions</h3>
-                <table border="1">
-                    <tr>
-                        <th>Session ID</th>
-                        <th>Start Date</th>
-                        <th>End Date</th>
-                        <th>Seat Capacity</th>
-                        <th>Daily Start Time</th>
-                    </tr>
-                    @foreach (var session in Model)
-                {
-                    <tr>
-                        <td>@session.SessionId</td>
-                        <td>@session.StartDate</td>
-                        <td>@session.EndDate</td>
-                        <td>@session.SeatCapacity</td>
-                        <td>@session.DailyStartTime</td>
-                        <td>
-                            @{ 
-                                if (session.SeatCapacity < 1)
-                                 {
-                                    <p>Session is Full</p>
-                                 }
-                                else
-                                    {
-                                        <a asp-controller="Swimmer" asp-action="EnrollSession" asp-route-id="@session.SessionId">
-                                       Enroll </a>
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <tr>
+                            <th>Session ID</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Seat Capacity</th>
+                            <th>Daily Start Time</th>
+                        </tr>
+                        @foreach (var session in Model)
+                        {
+                            <tr>
+                                <td>@session.SessionId</td>
+                                <td>@session.StartDate</td>
+                                <td>@session.EndDate</td>
+                                <td>@session.SeatCapacity</td>
+                                <td>@session.DailyStartTime</td>
+                                <td>
+                                    @{
+                                        if (session.SeatCapacity < 1)
+                                        {
+                                            <p>Session is Full</p>
+                                        }
+                                        else
+                                        {
+                                            <a asp-controller="Swimmer" asp-action="EnrollSession" asp-route-id="@session.SessionId">
+                                                Enroll
+                                            </a>
+                                        }
                                     }
-                            }
-                        
-                    </tr>
-                }
-                </table>
-            }
-} 
-<p><a asp-action="Index">Back to Swimmer Home</a></p>
+
+                            </tr>
+                        }
+                    </table>
+                    </div>
+                    }
+                    }
+                    <p><a asp-action="Index">Back to Swimmer Home</a></p>

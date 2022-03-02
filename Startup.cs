@@ -1,5 +1,4 @@
 using CourseProject_SoftwareArchitecture.Models;
-using FluentAssertions.Common;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
